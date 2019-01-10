@@ -1,0 +1,184 @@
+[
+  {
+    "brand": "BMW",
+    "price": 220000,
+    "mileage": 0,
+    "engine": {
+      "engineType": "PETROL_ENGINE",
+      "engineSize": 3.5,
+      "fuelConsumption": 15
+    },
+    "carBody": {
+      "colourOfBody": "BLACK",
+      "kindOfBody": "HATCHBACK",
+      "carEquipmentList": [
+        "ALARM",
+        "ELECTRICAL_WINDOW",
+        "AUDIO",
+        "LEATHER_INTERIOR"
+      ]
+    },
+    "wheel": {
+      "producerName": "Hankoog",
+      "sizeOfWheel": "17",
+      "kindOfWheel": "WINTER_WHEEL"
+    }
+  },
+  {
+    "brand": "Nissan",
+    "price": 120000,
+    "mileage": 100000,
+    "engine": {
+      "engineType": "DIESEL_ENGINE",
+      "engineSize": 1.5,
+      "fuelConsumption": 8
+    },
+    "carBody": {
+      "colourOfBody": "SILVER",
+      "kindOfBody": "SEDAN",
+      "carEquipmentList": [
+        "ALARM",
+        "AUDIO",
+        "ELECTRICAL_WINDOW"
+      ]
+    },
+    "wheel": {
+      "producerName": "DEBICA",
+      "sizeOfWheel": "15",
+      "kindOfWheel": "SUMMER_WHEEL"
+    }
+  },
+  {
+    "brand": "Fiat_126p",
+    "price": 1000000,
+    "mileage": 1000000,
+    "engine": {
+      "engineType": "DIESEL_ENGINE",
+      "engineSize": 5.5,
+      "fuelConsumption": 25
+    },
+    "carBody": {
+      "colourOfBody": "RED",
+      "kindOfBody": "HATCHBACK",
+      "carEquipmentList": [
+        "ALARM",
+        "AUDIO",
+        "ELECTRICAL_WINDOW",
+        "FOG_LAMPS",
+        "LEATHER_INTERIOR"
+      ]
+    },
+    "wheel": {
+      "producerName": "NEXEN",
+      "sizeOfWheel": "19",
+      "kindOfWheel": "WINTER_WHEEL"
+    }
+  },
+  {
+    "brand": "Hyundai",
+    "price": 45000,
+    "mileage": 20,
+    "engine": {
+      "engineType": "PETROL_ENGINE",
+      "engineSize": 1.6,
+      "fuelConsumption": 8
+    },
+    "carBody": {
+      "colourOfBody": "SILVER",
+      "kindOfBody": "HATCHBACK",
+      "carEquipmentList": [
+        "ALARM",
+        "AUDIO",
+        "ELECTRICAL_WINDOW",
+        "FOG_LAMPS",
+        "LEATHER_INTERIOR",
+        "AIR_CONDITIONING"
+      ]
+    },
+    "wheel": {
+      "producerName": "NEXEN",
+      "sizeOfWheel": "19",
+      "kindOfWheel": "SUMMER_WHEEL"
+    }
+  },
+  {
+    "brand": "Bentley",
+    "price": 8000000,
+    "mileage": 0,
+    "engine": {
+      "engineType": "DIESEL_ENGINE",
+      "engineSize": 4.6,
+      "fuelConsumption": 22
+    },
+    "carBody": {
+      "colourOfBody": "WHITE",
+      "kindOfBody": "SEDAN",
+      "carEquipmentList": [
+        "ALARM",
+        "AUDIO",
+        "ELECTRICAL_WINDOW",
+        "FOG_LAMPS",
+        "LEATHER_INTERIOR",
+        "AIR_CONDITIONING",
+        "BACK_DOOR"
+      ]
+    },
+    "wheel": {
+      "producerName": "HANKOOK",
+      "sizeOfWheel": "21",
+      "kindOfWheel": "WINTER_WHEEL"
+    }
+  },
+  {
+    "brand": "Aston_Martin",
+    "price": 4500000,
+    "mileage": 10,
+    "engine": {
+      "engineType": "DIESEL_ENGINE",
+      "engineSize": 5.6,
+      "fuelConsumption": 25
+    },
+    "carBody": {
+      "colourOfBody": "RED",
+      "kindOfBody": "SEDAN",
+      "carEquipmentList": [
+        "ALARM",
+        "AUDIO",
+        "ELECTRICAL_WINDOW",
+        "FOG_LAMPS",
+        "LEATHER_INTERIOR",
+        "AIR_CONDITIONING",
+        "BACK_DOOR",
+        "ELECTRICAL_WING_MIRROR"
+      ]
+    },
+    "wheel": {
+      "producerName": "Maxxis",
+      "sizeOfWheel": "18",
+      "kindOfWheel": "SUMMER_WHEEL"
+    }
+  },
+  {
+    "brand": "Warszawa",
+    "price": 150000,
+    "mileage": 2,
+    "engine": {
+      "engineType": "PETROL_ENGINE",
+      "engineSize": 1.0,
+      "fuelConsumption": 7
+    },
+    "carBody": {
+      "colourOfBody": "SILVER",
+      "kindOfBody": "SEDAN",
+      "carEquipmentList": [
+        "AUDIO",
+        "BACK_DOOR"
+      ]
+    },
+    "wheel": {
+      "producerName": "Maxxis",
+      "sizeOfWheel": "18",
+      "kindOfWheel": "SUMMER_WHEEL"
+    }
+  }
+]

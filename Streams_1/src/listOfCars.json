@@ -1,0 +1,50 @@
+// Skonczylem sobie tutaj na tym, ze nie chce zeby kazdy komponent to byl inny obiekt, w koncu to tylko jakis inny String. Zrobilem to tak ze komponenty odczytujemy z Jasona jako tablica stringow
+[
+  {
+    "brand": "BMW",
+    "price": 120000,
+    "engineSize": 1.9,
+    "mileage": 30000,
+    "components": [
+      "ABS",
+      "KLIMATYZACJA",
+      "RADIO"
+    ]
+  },
+  {
+    "brand": "AUDI",
+    "price": 220000,
+    "engineSize": 2.9,
+    "mileage": 35000,
+    "components": [
+      "ABS",
+      "KLIMATYZACJA",
+      "ELEKTYCZNE_LUSTERKA",
+      "SUPER BASS",
+      "HEATED_SEATS"
+    ]
+  },
+  {
+    "brand": "MAZDA",
+    "price": 60000,
+    "engineSize": 1.6,
+    "mileage": 40000,
+    "components": [
+      "ABS",
+      "PODGRZEWANE_FOTELE",
+      "RADIO",
+      "SKORA"
+    ]
+  },
+  {
+    "brand": "MERCEDES",
+    "price": 320000,
+    "engineSize": 3.5,
+    "mileage": 37000,
+    "components": [
+      "ABS",
+      "GPS",
+      "RADIO"
+    ]
+  }
+]
