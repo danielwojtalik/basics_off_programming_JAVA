@@ -1,0 +1,162 @@
+[
+  {
+    "client": {
+      "name": "Jan",
+      "surname": "Kowalski",
+      "age": 26,
+      "bankBalance": 2000
+    },
+    "productList": [
+      {
+        "name": "Computer",
+        "productCategory": "ELECTRONICS",
+        "productPrice": 2400
+      },
+      {
+        "name": "PanTadeusz",
+        "productCategory": "LITERATURE",
+        "productPrice": 15
+      },
+      {
+        "name": "PanTadeusz",
+        "productCategory": "LITERATURE",
+        "productPrice": 15
+      },
+      {
+        "name": "Computer",
+        "productCategory": "ELECTRONICS",
+        "productPrice": 2400
+      },
+      {
+        "name": "Computer",
+        "productCategory": "ELECTRONICS",
+        "productPrice": 2400
+      }
+    ]
+  },
+  {
+    "client": {
+      "name": "Adam",
+      "surname": "Zamojski",
+      "age": 45,
+      "bankBalance": 450000
+    },
+    "productList": [
+      {
+        "name": "Smartphone",
+        "productCategory": "ELECTRONICS",
+        "productPrice": 1500
+      },
+      {
+        "name": "Computer",
+        "productCategory": "ELECTRONICS",
+        "productPrice": 2400
+      }
+    ]
+  },
+  {
+    "client": {
+      "name": "Adam",
+      "surname": "Zamojski",
+      "age": 45,
+      "bankBalance": 450000
+    },
+    "productList": [
+      {
+        "name": "Smartphone",
+        "productCategory": "ELECTRONICS",
+        "productPrice": 1400
+      },
+      {
+        "name": "Computer",
+        "productCategory": "ELECTRONICS",
+        "productPrice": 2400
+      }
+    ]
+  },
+  {
+    "client": {
+      "name": "Edyta",
+      "surname": "Kwaśniewska",
+      "age": 45,
+      "bankBalance": 450000
+    },
+    "productList": [
+      {
+        "name": "Smartphone",
+        "productCategory": "ELECTRONICS",
+        "productPrice": 1400
+      },
+      {
+        "name": "Computer",
+        "productCategory": "ELECTRONICS",
+        "productPrice": 2400
+      },
+      {
+        "name": "Computer",
+        "productCategory": "ELECTRONICS",
+        "productPrice": 2200
+      },
+      {
+        "name": "bag",
+        "productCategory": "CLOTHES",
+        "productPrice": 55
+      },
+      {
+        "name": "Jeans",
+        "productCategory": "CLOTHES",
+        "productPrice": 155
+      }
+    ]
+  },
+  {
+    "client": {
+      "name": "Jan",
+      "surname": "Kowalski",
+      "age": 26,
+      "bankBalance": 2000
+    },
+    "productList": [
+      {
+        "name": "Computer",
+        "productCategory": "ELECTRONICS",
+        "productPrice": 2400
+      },
+      {
+        "name": "PanTadeusz",
+        "productCategory": "LITERATURE",
+        "productPrice": 15
+      },
+      {
+        "name": "PanTadeusz",
+        "productCategory": "LITERATURE",
+        "productPrice": 15
+      }
+    ]
+  },
+  {
+    "client": {
+      "name": "Hubert",
+      "surname": "Krakowiak",
+      "age": 12,
+      "bankBalance": 250
+    },
+    "productList": [
+      {
+        "name": "Smartphone",
+        "productCategory": "ELECTRONICS",
+        "productPrice": 45
+      },
+      {
+        "name": "T-Shirt",
+        "productCategory": "CLOTHES",
+        "productPrice": 15
+      },
+      {
+        "name": "Pizza",
+        "productCategory": "FOOD",
+        "productPrice": 15
+      }
+    ]
+  }
+]
