@@ -1,4 +1,4 @@
-package com.app.read_from_json;
+package com.app.converter;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

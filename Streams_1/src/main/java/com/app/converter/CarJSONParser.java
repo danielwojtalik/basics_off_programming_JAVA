@@ -1,4 +1,4 @@
-package com.app.read_from_json;
+package com.app.converter;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

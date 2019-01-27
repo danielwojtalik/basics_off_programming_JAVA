@@ -1,12 +1,12 @@
 package com.app.main;
 
 
+import com.app.converter.ClientProductsJsonConverter;
 import com.app.model.Client;
 import com.app.model.Product;
 import com.app.model.ProductCategory;
-import com.app.my_exceptions.MyException;
-import com.app.read_from_json.ClientProducts;
-import com.app.read_from_json.InputDataJsonParser;
+
+import com.app.converter.ClientProducts;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -20,62 +20,22 @@ import java.util.stream.Stream;
 @AllArgsConstructor
 @Data
 
-public class Shopping {
+public class DataProcess {
     private Map<Client, Map<Product, Long>> clientShoppingMap;
 
-    public static void main(String[] args) {
 
-        try {
-            Shopping sh = new Shopping("CollectionsAndMaps_1/Shopping_1.json");
-
-
-            System.out.println("<SHOW ME ALL CLIENTS WITH THEIR ALL PRODUCTS AND QUANTITY OF THOSE PRODUCTS>");
-            sh.clientShoppingMap.forEach((k, v) -> System.out.println("key: " + k + "value: " + v));
-            System.out.println("__________________________________________________________________________________________");
-            System.out.println("<SHOW ME BEST CLIENT, WHO HAS SPENT MOST MONEY ON ALL PRODUCTS>");
-            System.out.println(sh.theBestClient());
-            System.out.println("__________________________________________________________________________________________");
-            System.out.println("<SHOW ME BEST CLIENT, WHO HAS SPENT MOST MONEY IN GIVEN CATEGORY>");
-            System.out.println(sh.theBestClientInCategory(ProductCategory.LITERATURE));
-            System.out.println("__________________________________________________________________________________________");
-            System.out.println("<SHOW ME QUANTITIES OF ALL PRODUCTS CATEGORY GROUPED BY CLIENT AGE>");
-            System.out.println(sh.comparisionOfSoldCategoriesInAgeOfClient());
-            System.out.println("__________________________________________________________________________________________");
-            System.out.println("<SHOW ME QUANTITIES OF ALL PRODUCTS CATEGORY GROUPED BY CLIENT AGE ORDERED DESC BY QUANTITY OF PRODUCT IN EVERY CATEGORY>");
-            System.out.println(sortCategoriesByQuantity(sh.comparisionOfSoldCategoriesInAgeOfClient()));
-            System.out.println("__________________________________________________________________________________________");
-            System.out.println("<SHOW ME  LIST OF PRODUCT CATEGORY WHICH ARE BEST SOLD IN EVERY AGE OF CLIENTS>");
-            System.out.println(mapOfClientsAgeAndListOfBestCategory(sh.comparisionOfSoldCategoriesInAgeOfClient()));
-            System.out.println("__________________________________________________________________________________________");
-            System.out.println("<SHOW ME STATISTICS>");
-            sh.avgPriceInCategory();
-            System.out.println("__________________________________________________________________________________________");
-//            System.out.println("<SHOW ME THE MOST OFTEN BOUGHT CATEGORY FROM CLIENTS>");
-//            sh.oftenBoughtCategoryByClients();
-//            System.out.println("__________________________________________________________________________________________");
-            System.out.println("<SHOW ME CLIENTS WHICH BOUGHT MOST OFTEN PRODUCTS FROM EVERY CATEGORY>");
-            System.out.println(sh.oftenBoughtCategoryByClients());
-            System.out.println("__________________________________________________________________________________________");
-            System.out.println("<SHOW ME ALL CLIENTS WITH ACCOUNT BALANCE AFTER BUYING ALL PRODUCTS IN THEIR LIST - CAN THEY AFFORD ALL SHOPPING? >");
-            System.out.println(sh.canBuyAllProducts());
-            System.out.println("__________________________________________________________________________________________");
-        } catch (MyException e) {
-            e.printStackTrace();
-            System.out.println(e.getExceptionInfo().getExceptionCode());
-            System.out.println(e.getExceptionInfo().getDescription());
-            System.out.println(e.getExceptionInfo().getExceptionTime());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     // create a constructor which take as a parameter JSON file name and parse this file with result of map with all clients
     // with all products and quantity of it which they have bought (client can buy multiple times the same products). It also should work if the client appear more than one time in file
-    // (client can make shopping every morning e.g.).
-    public Shopping(String jsonFileName) {
+    // (client can make service every morning e.g.).
+    public DataProcess(String jsonFileName) {
 
         // parsing file to the list of ClientProducts
-        List<ClientProducts> clientProductsList = InputDataJsonParser.readFromJson(jsonFileName);
+        //List<ClientProducts> clientProductsList = InputDataJsonParser.readFromJson(jsonFileName);
+
+        ClientProductsJsonConverter jc = new ClientProductsJsonConverter(jsonFileName);
+        List<ClientProducts> clientProductsList = jc.fromJson().get();
+
         // grouping this list to elements belong to the same client and flatmapping to Product list
         Map<Client, List<Product>> grouped = clientProductsList
                 .stream()
@@ -93,7 +53,21 @@ public class Shopping {
 
     public Client theBestClient() { // client who spent the most money in general
 
-        Map<Client, BigDecimal> moneyFromClients = new HashMap<>();
+        return clientShoppingMap.entrySet()
+                .stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        e -> e.getValue().entrySet()
+                                .stream().map(ee -> Collections.nCopies(ee.getValue().intValue(), ee.getKey())).flatMap(Collection::stream)
+                                .map(Product::getProductPrice).reduce(BigDecimal.ZERO, BigDecimal::add)
+                ))
+                .entrySet()
+                .stream()
+                .min(Comparator.comparing(Map.Entry::getValue, Comparator.reverseOrder()))
+                .orElseThrow(IllegalStateException::new)
+                .getKey();
+
+        /*Map<Client, BigDecimal> moneyFromClients = new HashMap<>();
 
         Set<Map.Entry<Client, Map<Product, Long>>> entriesSet = clientShoppingMap.entrySet();
         for (Map.Entry<Client, Map<Product, Long>> e : entriesSet) {
@@ -111,7 +85,7 @@ public class Shopping {
                 .sorted((p1, p2) -> p2.getValue().compareTo(p1.getValue()))
                 .findFirst()
                 .orElseThrow(() -> new NullPointerException("ANY COMPONENT FOUND"))
-                .getKey();
+                .getKey();*/
     }
 
     // the same as previous, but we consider only one ProductCategory (argument of method)
@@ -198,7 +172,6 @@ public class Shopping {
                     .map(entry -> entry.getKey())
                     .collect(Collectors.toList())
             );
-
         }
         return m3;
     }
@@ -306,8 +279,6 @@ public class Shopping {
         for (Map.Entry<ProductCategory, List<Client>> e : productCategoryClientMap.entrySet()) {
             System.out.println("keys: " + e.getKey() + " value: " + e.getValue());*/
         return productCategoryClientMap;
-
-
     }
 
     public Map<Client, BigDecimal> canBuyAllProducts() {
@@ -315,7 +286,6 @@ public class Shopping {
         Set<Map.Entry<Client, Map<Product, Long>>> entriesSet = clientShoppingMap.entrySet();
         Map<Client, BigDecimal> clientAccontBalanceMap = new HashMap<>();
         BigDecimal sum;
-
 
         for (Map.Entry<Client, Map<Product, Long>> e : entriesSet) {
             sum = new BigDecimal("0");

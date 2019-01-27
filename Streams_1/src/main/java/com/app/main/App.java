@@ -1,7 +1,7 @@
 package com.app.main;
 
-import com.app.read_from_json.Car;
-import com.app.read_from_json.CarJSONParser;
+import com.app.converter.Car;
+import com.app.converter.CarJSONParser;
 import com.app.custom_exceptions.MyException;
 
 import java.util.ArrayList;

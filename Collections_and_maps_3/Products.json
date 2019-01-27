@@ -1,0 +1,146 @@
+[
+  {
+    "name": "PC",
+    "quantity": 1,
+    "price": 2500,
+    "category":1
+  },
+  {
+    "name": "battery",
+    "quantity": 8,
+    "price": 15,
+    "category":1
+  },
+  {
+    "name": "samsung S10",
+    "quantity": 1,
+    "price": 6500,
+    "category":1
+  },
+  {
+    "name": "iphone XS Max",
+    "quantity": 1,
+    "price": 7000,
+    "category":1
+  },
+  {
+    "name": "nokia 3310",
+    "quantity": 1,
+    "price": 100,
+    "category": 1
+  },
+  {
+    "name": "samsung TV",
+    "quantity": 1,
+    "price": 5000,
+    "category": 1
+  },
+  {
+    "name": "notebook",
+    "quantity": 1,
+    "price": 2500,
+    "category": 1
+  },
+  {
+    "name": "juice",
+    "quantity": 2,
+    "price": 10,
+    "category": 2
+  },
+  {
+    "name": "sugar",
+    "quantity": 10,
+    "price": 25,
+    "category": 2
+  },
+  {
+    "name": "apple",
+    "quantity": 3,
+    "price": 10,
+    "category": 2
+  },
+  {
+    "name": "iron",
+    "quantity": 1,
+    "price": 250,
+    "category": 3
+  },
+  {
+    "name": "washing machine",
+    "quantity": 1,
+    "price": 2250,
+    "category": 3
+  },
+  {
+    "name": "cooker",
+    "quantity": 1,
+    "price": 1560,
+    "category": 3
+  },
+  {
+    "name": "vacuum cleaner",
+    "quantity": 1,
+    "price": 250,
+    "category": 3
+  },
+  {
+    "name": "fridge",
+    "quantity": 1,
+    "price": 1600,
+    "category": 3
+  },
+  {
+    "name": "T-shirt",
+    "quantity": 2,
+    "price": 50,
+    "category": 4
+  },
+  {
+    "name": "jacket",
+    "quantity": 1,
+    "price": 150,
+    "category": 4
+  },
+  {
+    "name": "shoes",
+    "quantity": 2,
+    "price": 675,
+    "category": 4
+  },
+  {
+    "name": "skirt",
+    "quantity": 5,
+    "price": 450,
+    "category": 4
+  },
+  {
+    "name": "trousers",
+    "quantity": 1,
+    "price": 150,
+    "category": 4
+  },
+  {
+    "name": "wipers",
+    "quantity": 2,
+    "price": 60,
+    "category": 5
+  },
+  {
+    "name": "tyres",
+    "quantity": 4,
+    "price": 1200,
+    "category": 5
+  },
+  {
+    "name": "motor oil",
+    "quantity": 5,
+    "price": 150,
+    "category": 5
+  },
+  {
+    "name": "petrol",
+    "quantity": 30,
+    "price": 150,
+    "category": 5
+  }
+]

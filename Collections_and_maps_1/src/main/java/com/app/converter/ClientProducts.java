@@ -1,4 +1,4 @@
-package com.app.read_from_json;
+package com.app.converter;
 
 import com.app.model.Client;
 import com.app.model.Product;
