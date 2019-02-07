@@ -2,6 +2,7 @@ package com.app.exceptions;
 
 public enum ExceptionCode {
     JSON,
-    VALIDATION,
+    DATA_SERVICE,
     KNAPSACK_PROBLEM
+
 }

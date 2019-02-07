@@ -1,6 +1,7 @@
 package com.app.service;
 
 import com.app.converter.CategoryJsonConverter;
+import com.app.exceptions.ExceptionCode;
 import com.app.exceptions.MyException;
 import com.app.model.Client;
 import com.app.model.Product;
@@ -14,66 +15,53 @@ import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
-public class DataService {
-    private  Map<Client, List<Product>> clientShoppingMap;
-    private  Map<String, String> category;
+class DataService {
+    private final Map<Client, List<Product>> clientProducts;
+    private final Map<String, String> categories;
 
-    public DataService(String clientsJsonFilename, String productsJsonFilename, String categoryJsonFilename) {
-        this.clientShoppingMap = new KnapsackProblemService(clientsJsonFilename, productsJsonFilename).resolveKnapsackProblem();
-        try{
-            this.category = new CategoryJsonConverter(categoryJsonFilename).fromJson().get();
-        }catch (MyException e){
-            System.err.println("EXCEPTION FROM CATEGORY JSON FILE PARSER");
-            System.err.println(e.getExceptionInfo().getExceptionMessage());
+    DataService(String clientsJsonFilename, String productsJsonFilename, String categoryJsonFilename) {
+        if (clientsJsonFilename == null || productsJsonFilename == null || categoryJsonFilename == null) {
+            throw new MyException(ExceptionCode.DATA_SERVICE, "NULL POINTER EXCEPTION");
         }
+        this.clientProducts = new KnapsackProblemService(clientsJsonFilename, productsJsonFilename).resolveKnapsackProblem();
+        this.categories = new CategoryJsonConverter(categoryJsonFilename).fromJson().get();
+
     }
 
-    //show me Map with client and their shopping
-    public void showClientShopping(){
-        this.clientShoppingMap.forEach((k,v) -> System.out.println(k + " gets: "+v.stream().map(product -> product.getName()).collect(Collectors.toList())));
-    }
-
-
-    //show the client, who bought the most products?
-    public void clientWithMostProducts() {
-        System.out.println(clientShoppingMap
+    // get Client which bought most products
+    public Client getClientWithMostProducts() {
+        return clientProducts
                 .entrySet()
                 .stream()
                 .sorted((e1, e2) -> Integer.compare(e2.getValue().size(), e1.getValue().size()))
                 .map(Map.Entry::getKey)
                 .findFirst()
-                .orElseThrow(() -> new NullPointerException("ANY ELEMENT EXISTS")));
-        System.out.println("______________________________________________________________________________________________________");
-
+                .orElseThrow(() -> new NullPointerException("ANY ELEMENT EXISTS"));
     }
 
-    //show the client, who have spent most money on service?
-    public void clientSpentMostMoney() {
-        System.out.println(clientShoppingMap
+
+    //get Client, who have spent most money on service?
+    public Client getClientWhoSpentMostMoney() {
+        return clientProducts
                 .entrySet()
                 .stream()
                 .sorted((e1, e2) -> (e2.getValue().stream().map(product -> product.getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add)
                         .compareTo(e1.getValue().stream().map(product -> product.getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add))))
                 .map(Map.Entry::getKey)
                 .findFirst()
-                .orElseThrow(() -> new NullPointerException("ANY ELEMENT EXISTS")));
-        System.out.println("______________________________________________________________________________________________________");
+                .orElseThrow(() -> new NullPointerException("ANY ELEMENT EXISTS"));
     }
 
-    // how many times each product was bought
+    // show statistics of products
     public void showProductsSellingStatistics() {
-        List<Product> productList = new ArrayList<>();
+
         Map<Product, Long> productLongMap;
 
-        for (Client c : this.clientShoppingMap.keySet()) {
-            productList.addAll(this.clientShoppingMap.get(c));
-        }
-        productLongMap = productList
+        // return map with quantity of each product
+        productLongMap = this.clientProducts.values()
                 .stream()
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
-                .entrySet()
-                .stream()
-                .collect(Collectors.toMap(ee1 -> ee1.getKey(), ee2 -> ee2.getValue()));
+                .flatMap(l -> l.stream())
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
         long max = Collections.max(productLongMap.values());
         long min = Collections.min(productLongMap.values());
@@ -84,31 +72,30 @@ public class DataService {
         Set<Product> leastOftenChose = productLongMap.entrySet().stream().filter(e -> e.getValue() == min)
                 .collect(Collectors.toSet()).stream().collect(Collectors.toMap(ee1 -> ee1.getKey(), ee1 -> ee1.getValue())).keySet();
 
+        // show statistics
         System.out.println("How many times each product was bought:");
         productLongMap.forEach((k, v) -> System.out.println(k + " = " + v));
         System.out.println();
         System.out.println("List of the most-bought products(" + max + " times)" + ":");
         mostOftenChose.forEach(product -> System.out.println(product));
         System.out.println();
-        System.out.println("List of the least-purchased products(" + min + " times)"+ ":");
+        System.out.println("List of the least-purchased products(" + min + " times)" + ":");
         leastOftenChose.forEach(product -> System.out.println(product));
         System.out.println();
         System.out.println("______________________________________________________________________________________________________");
     }
 
-    public void showCategoryPopularity() {
-        Map<String, Long> productLongMap;
+    public Map<String, Long> getCategoryPopularity() {
         List<Product> productList = new ArrayList<>();
-        this.clientShoppingMap.values().forEach(products -> productList.addAll(products));
-
-        productLongMap = productList
-                .stream()
-                .collect(Collectors.groupingBy(p -> p.getCategory(), Collectors.counting()))
-                .entrySet()
-                .stream()
-                .sorted(Comparator.comparing(Map.Entry::getValue))
-                .collect(Collectors.toMap(e -> this.category.get(Integer.toString(e.getKey())), e -> e.getValue(), (v1, v2) -> v1, () -> new LinkedHashMap<>()));
-        productLongMap.forEach((k, v) -> System.out.println(k + " = " + v));
-        System.out.println("______________________________________________________________________________________________________");
+        this.clientProducts.values().forEach(products -> productList.addAll(products));
+        return
+                productList
+                        .stream()
+                        .collect(Collectors.groupingBy(p -> p.getCategory(), Collectors.counting()))
+                        .entrySet()
+                        .stream()
+                        .sorted(Comparator.comparing(Map.Entry::getValue))
+                        .collect(Collectors.toMap(e -> this.categories.get(Integer.toString(e.getKey())), e -> e.getValue(), (v1, v2) -> v1, () -> new LinkedHashMap<>()));
     }
+
 }

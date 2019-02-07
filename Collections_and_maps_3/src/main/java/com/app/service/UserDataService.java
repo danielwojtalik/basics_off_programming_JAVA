@@ -11,15 +11,13 @@ public class UserDataService {
         try {
             return Integer.parseInt(sc.nextLine());
         } catch (InputMismatchException e) {
-            System.err.println("CHOSE ONE OPTION FROM 1-6");
+            System.err.println("CHOOSE ONE OPTION FROM 1-6");
             return Integer.parseInt(sc.nextLine());
         }catch (NumberFormatException e){
-            System.err.println("CHOSE ONE OPTION FROM 1-6");
+            System.err.println("CHOOSE ONE OPTION FROM 1-6");
             return Integer.parseInt(sc.nextLine());
         }
-
     }
-
     public void close() {
         sc.close();
     }

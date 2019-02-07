@@ -69,10 +69,10 @@ public class InputDataJsonParser {
                                     client.getProducts(), (oldValue, newValue) ->
                                     Stream.concat(oldValue.stream(), newValue.stream()).collect(Collectors.toList())));
 
-            List<Client> clientList = new ArrayList<>();
+            List<Client> clients = new ArrayList<>();
             for (Client e : concatClientWithShoppingList.keySet()) {
                 e.setProducts(concatClientWithShoppingList.get(e));
-                clientList.add(e);
+                clients.add(e);
             }
             System.out.println(withoutDuplicates);
             return withoutDuplicates;
